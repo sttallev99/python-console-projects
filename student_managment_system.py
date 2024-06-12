@@ -11,7 +11,20 @@ def add_student(name, age, grade, subjects):
     - grade (float): The grade of the student.
     - subjects (list of str): The subjects the student is enrolled in.
     """
-    # Code to add a new student record
+
+    try:
+        if name in students.keys():
+            raise Exception("Student name already exist!")
+        else:
+            students[name] = {
+                "name": name,
+                "age": age,
+                "grade": grade,
+                "subjects": subjects
+            }
+            print("Student added!")
+    except Exception as inst:
+        print(inst)
 
 
 def update_student(name):
@@ -75,7 +88,7 @@ def main():
             name = input("Enter student's name: ")
             age = int(input("Enter student's age: "))
             grade = float(input("Enter student's grade: "))
-            subjects = input("Enter student's subjects (comma-separated): ").split(',')
+            subjects = input("Enter student's subjects (comma-separated): ").split(', ')
             # Call the add_student function
             add_student(name, age, grade, subjects)
         elif choice == '2':
