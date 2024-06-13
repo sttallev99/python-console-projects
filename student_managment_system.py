@@ -60,6 +60,14 @@ def delete_student(name):
     - name (str): The name of the student to delete.
     """
     # Check if the student exists
+    try:
+        if name in students.keys():
+            del students[name]
+            print("Student deleted!")
+        else:
+            raise Exception("Ops! Student not found. Try again...")
+    except Exception as inst:
+        print(inst)
     # Code to delete the student's record
 
 
@@ -85,6 +93,8 @@ def list_all_students():
                 print(key)
                 for k, v in value.items():
                     print(f"\t{k}: {v}")
+        else:
+            raise Exception("Nothing to show! Try again later...")
     except Exception as inst:
         print(inst)
 
