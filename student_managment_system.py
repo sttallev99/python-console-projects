@@ -79,6 +79,14 @@ def search_student(name):
     """
     # Check if the student exists
     # Code to return the student's record
+    try:
+        if name in students.keys():
+            student = students[name]
+            print(student)
+        else:
+            raise Exception("Student not found. Try again...")
+    except Exception as inst:
+        print(inst)
 
 
 def list_all_students():
