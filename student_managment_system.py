@@ -33,9 +33,24 @@ def update_student(name):
     Args:
     - name (str): The name of the student whose record is to be updated.
     """
-    # Check if the student exists
-    # Prompt the user to update fields and keep current values if fields are empty
-    # Code to update the student's record
+
+    try:
+        if name in students.keys():
+            while True:
+                try:
+                    name = input("Enter updated student's name: ")
+                    age = int(input("Enter updated student's age: "))
+                    grade = float(input("Enter updated student's grade: "))
+                    subjects = input("Enter updated student's subjects (comma-separated): ").split(", ")
+                    updated_student = {"name": name, "age": age, "grade": grade, "subject": subjects}
+                    students[name].update(updated_student)
+                    break
+                except ValueError:
+                    print("Ops, please enter valid values. Try again...")
+        else:
+            raise Exception("Student not found. Try again...")
+    except Exception as inst:
+        print(inst)
 
 
 def delete_student(name):
@@ -64,6 +79,14 @@ def list_all_students():
     """
     # Check if there are any student records
     # Code to list all students
+    try:
+        if len(students) != 0:
+            for key, value in students.items():
+                print(key)
+                for k, v in value.items():
+                    print(f"\t{k}: {v}")
+    except Exception as inst:
+        print(inst)
 
 
 def main():
