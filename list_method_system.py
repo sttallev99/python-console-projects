@@ -64,7 +64,12 @@ def handle_remove(lst):
     # Use the remove() method to delete the first occurrence of the value
     # Handle the case where the value is not found in the list
     # Print the updated list
-    pass
+    el = input("Enter a value to remove from the list: ")
+    try:
+        lst.remove(el)
+        print(lst)
+    except ValueError:
+        print("The element you are trying to remove in not in the list.")
 
 
 def handle_pop(lst):
