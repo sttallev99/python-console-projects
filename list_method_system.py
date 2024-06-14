@@ -98,7 +98,8 @@ def handle_pop(lst):
 def handle_clear(lst):
     # TODO: Use the clear() method to remove all items from the list
     # Print the updated list
-    pass
+    lst.clear()
+    print(lst)
 
 
 def handle_index(lst):
