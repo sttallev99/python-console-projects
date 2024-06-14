@@ -44,14 +44,19 @@ def handle_extend(lst):
         print(arg)
     # Use the extend() method to add these values to the list
     # Print the updated list
-    pass
 
 
 def handle_insert(lst):
     # TODO: Prompt the user for an index and a value to insert at that index
     # Use the insert() method to add the value at the specified index
     # Print the updated list
-    pass
+    try:
+        el_index = int(input("Enter the index at which new element should be located: "))
+        el = input("Enter the new element: ")
+        lst.insert(el_index, el)
+        print(lst)
+    except ValueError:
+        print("element index must me a whole number. Try again...")
 
 
 def handle_remove(lst):
