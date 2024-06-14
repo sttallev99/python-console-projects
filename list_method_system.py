@@ -18,11 +18,30 @@ def handle_append(lst):
     # TODO: Prompt the user for a value to append to the list
     # Use the append() method to add the value to the list
     # Print the updated list
-    pass
+    try:
+        el = input("Enter a value to add to the end of the list: ")
+        if el != "":
+            lst.append(el)
+            print(lst)
+        else:
+            raise Exception("New element cannot be empty string. Try again...")
+    except Exception as arg:
+        print(arg)
 
 
 def handle_extend(lst):
     # TODO: Prompt the user for values to extend the list (comma-separated)
+    new_values = input("Enter values to extend the list: ").split(", ")
+    try:
+        for el in new_values:
+            if el != "":
+                continue
+            else:
+                raise Exception("The are no new values or some of them are empty strings. Try again with new values...")
+        lst.extend(new_values)
+        print(lst)
+    except Exception as arg:
+        print(arg)
     # Use the extend() method to add these values to the list
     # Print the updated list
     pass
