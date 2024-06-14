@@ -1,4 +1,3 @@
-# Dictionary to store student records
 students = {}
 
 
@@ -77,8 +76,6 @@ def search_student(name):
     Args:
     - name (str): The name of the student to search for.
     """
-    # Check if the student exists
-    # Code to return the student's record
     try:
         if name in students.keys():
             student = students[name]
@@ -93,8 +90,6 @@ def list_all_students():
     """
     List all student records.
     """
-    # Check if there are any student records
-    # Code to list all students
     try:
         if len(students) != 0:
             for key, value in students.items():
