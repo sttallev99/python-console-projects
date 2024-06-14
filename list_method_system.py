@@ -75,9 +75,24 @@ def handle_remove(lst):
 def handle_pop(lst):
     # TODO: Prompt the user for an index to pop (optional, leave empty to pop last item)
     # Use the pop() method to remove the item at the specified index or the last item if no index is provided
+    el_index = input("Optional - if you want to pop item at specific index, or tap enter and remove last element: ")
+    if el_index == "":
+        lst.pop()
+    else:
+        try:
+            if not isinstance(int(el_index), int):
+                raise ValueError
+            if int(el_index) > len(lst):
+                raise Exception
+            lst.pop(int(el_index))
+            print(lst)
+        except (ValueError, Exception):
+            if ValueError:
+                print("Index must be a whole number which is in range of the list. Try again...")
+            else:
+                print(Exception)
     # Handle the case where the index is out of range
     # Print the updated list
-    pass
 
 
 def handle_clear(lst):
