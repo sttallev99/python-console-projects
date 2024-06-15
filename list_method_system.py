@@ -142,7 +142,8 @@ def handle_reverse(lst):
 def handle_copy(lst):
     # TODO: Use the copy() method to create a shallow copy of the list
     # Print the copied list
-    pass
+    new_list = lst.copy()
+    print(new_list)
 
 
 def main():
