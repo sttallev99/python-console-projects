@@ -107,11 +107,17 @@ def handle_index(lst):
     # Use the index() method to find the index of the value
     # Handle the case where the value is not found in the list
     # Print the index of the value
-    pass
+    el = input("Enter value to find its index: ")
+    try:
+        print(f"The element - {el} you searched for is at index - {lst.index(el)}")
+    except ValueError:
+        print("The element you searched is not in the list. Try again...")
 
 
 def handle_count(lst):
     # TODO: Prompt the user for a value to count its occurrences in the list
+    el = input("Enter a value to count its occurrences in the list: ")
+    print(f"The element - {el} exist {lst.count(el)} times in the list")
     # Use the count() method to count how many times the value appears in the list
     # Print the count of the value
     pass
@@ -119,7 +125,10 @@ def handle_count(lst):
 
 def handle_sort(lst):
     # TODO: Use the sort() method to sort the list in ascending order
+    lst.sort(key=int)
+    print(lst)
     # Print the updated list
+
     pass
 
 
@@ -137,7 +146,7 @@ def handle_copy(lst):
 
 def main():
     initial_values = input("Enter initial list values (comma-separated): ")
-    lst = initial_values.split(',')
+    lst = initial_values.split(', ')
 
     while True:
         display_menu()
