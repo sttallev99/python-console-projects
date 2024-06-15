@@ -15,9 +15,6 @@ def display_menu():
 
 
 def handle_append(lst):
-    # TODO: Prompt the user for a value to append to the list
-    # Use the append() method to add the value to the list
-    # Print the updated list
     try:
         el = input("Enter a value to add to the end of the list: ")
         if el != "":
@@ -30,7 +27,6 @@ def handle_append(lst):
 
 
 def handle_extend(lst):
-    # TODO: Prompt the user for values to extend the list (comma-separated)
     new_values = input("Enter values to extend the list: ").split(", ")
     try:
         for el in new_values:
@@ -42,14 +38,9 @@ def handle_extend(lst):
         print(lst)
     except Exception as arg:
         print(arg)
-    # Use the extend() method to add these values to the list
-    # Print the updated list
 
 
 def handle_insert(lst):
-    # TODO: Prompt the user for an index and a value to insert at that index
-    # Use the insert() method to add the value at the specified index
-    # Print the updated list
     try:
         el_index = int(input("Enter the index at which new element should be located: "))
         el = input("Enter the new element: ")
@@ -60,10 +51,6 @@ def handle_insert(lst):
 
 
 def handle_remove(lst):
-    # TODO: Prompt the user for a value to remove from the list
-    # Use the remove() method to delete the first occurrence of the value
-    # Handle the case where the value is not found in the list
-    # Print the updated list
     el = input("Enter a value to remove from the list: ")
     try:
         lst.remove(el)
@@ -73,8 +60,6 @@ def handle_remove(lst):
 
 
 def handle_pop(lst):
-    # TODO: Prompt the user for an index to pop (optional, leave empty to pop last item)
-    # Use the pop() method to remove the item at the specified index or the last item if no index is provided
     el_index = input("Optional - if you want to pop item at specific index, or tap enter and remove last element: ")
     if el_index == "":
         lst.pop()
@@ -91,22 +76,14 @@ def handle_pop(lst):
                 print("Index must be a whole number which is in range of the list. Try again...")
             else:
                 print(Exception)
-    # Handle the case where the index is out of range
-    # Print the updated list
 
 
 def handle_clear(lst):
-    # TODO: Use the clear() method to remove all items from the list
-    # Print the updated list
     lst.clear()
     print(lst)
 
 
 def handle_index(lst):
-    # TODO: Prompt the user for a value to find its index
-    # Use the index() method to find the index of the value
-    # Handle the case where the value is not found in the list
-    # Print the index of the value
     el = input("Enter value to find its index: ")
     try:
         print(f"The element - {el} you searched for is at index - {lst.index(el)}")
@@ -115,33 +92,21 @@ def handle_index(lst):
 
 
 def handle_count(lst):
-    # TODO: Prompt the user for a value to count its occurrences in the list
     el = input("Enter a value to count its occurrences in the list: ")
     print(f"The element - {el} exist {lst.count(el)} times in the list")
-    # Use the count() method to count how many times the value appears in the list
-    # Print the count of the value
-    pass
 
 
 def handle_sort(lst):
-    # TODO: Use the sort() method to sort the list in ascending order
     lst.sort(key=int)
     print(lst)
-    # Print the updated list
-
-    pass
 
 
 def handle_reverse(lst):
-    # TODO: Use the reverse() method to reverse the order of the list
     lst.reverse()
     print(lst)
-    pass
 
 
 def handle_copy(lst):
-    # TODO: Use the copy() method to create a shallow copy of the list
-    # Print the copied list
     new_list = lst.copy()
     print(new_list)
 
