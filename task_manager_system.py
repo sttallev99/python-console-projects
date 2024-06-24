@@ -83,6 +83,11 @@ def get_task(tasks, task_id):
     Returns:
     dict: The task with the specified ID, or None if not found.
     """
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            return curr_task
+
+    return "Not found task with the given id.Try again..."
 
 
 def set_task_priority(tasks, task_id, priority):
@@ -98,6 +103,17 @@ def set_task_priority(tasks, task_id, priority):
     list of dict: Updated list of tasks.
     """
 
+    is_found = False
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            curr_task["priority"] = priority
+            is_found = True
+            return tasks
+    try:
+        if not is_found:
+            raise Exception
+    except Exception as e:
+        print("Not found task with the given id.Try again...")
 
 def set_task_deadline(tasks, task_id, deadline):
     """
@@ -355,14 +371,23 @@ def main():
             if isinstance(tasks, list):
                 print("Task updated successfully.")
         elif choice == '4':
-            task_id = int(input("Enter task ID to get: "))
+            try:
+                task_id = int(input("Enter task ID to get: "))
+            except ValueError as e:
+                print("task id need to be a number")
+                continue
             task = get_task(tasks, task_id)
             print("Task details:", task)
         elif choice == '5':
-            task_id = int(input("Enter task ID to set priority: "))
+            try:
+                task_id = int(input("Enter task ID to set priority: "))
+            except ValueError:
+                print("task id need to be a number")
+                continue
             priority = input("Enter new priority (low, medium, high): ")
             tasks = set_task_priority(tasks, task_id, priority)
-            print("Task priority set successfully.")
+            if isinstance(tasks, list):
+                print("Task priority set successfully.")
         elif choice == '6':
             task_id = int(input("Enter task ID to set deadline: "))
             deadline = input("Enter new deadline (YYYY-MM-DD): ")
