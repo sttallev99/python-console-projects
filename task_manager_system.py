@@ -127,6 +127,18 @@ def set_task_deadline(tasks, task_id, deadline):
     Returns:
     list of dict: Updated list of tasks.
     """
+    is_found = False
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            curr_task["deadline"] = deadline
+            is_found = True
+            return tasks
+
+    try:
+        if not is_found:
+            raise Exception
+    except Exception as e:
+        print("Not found task with the given id.Try again...")
 
 
 def mark_task_as_completed(tasks, task_id):
@@ -389,10 +401,15 @@ def main():
             if isinstance(tasks, list):
                 print("Task priority set successfully.")
         elif choice == '6':
-            task_id = int(input("Enter task ID to set deadline: "))
+            try:
+                task_id = int(input("Enter task ID to set deadline: "))
+            except ValueError as e:
+                print("task id need to be a number")
+                continue
             deadline = input("Enter new deadline (YYYY-MM-DD): ")
             tasks = set_task_deadline(tasks, task_id, deadline)
-            print("Task deadline set successfully.")
+            if isinstance(tasks, list):
+                print("Task deadline set successfully.")
         elif choice == '7':
             task_id = int(input("Enter task ID to mark as completed: "))
             tasks = mark_task_as_completed(tasks, task_id)
