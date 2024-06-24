@@ -56,6 +56,20 @@ def update_task(tasks, task_id, updated_task):
     Returns:
     list of dict: Updated list of tasks.
     """
+    is_found = False
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            is_found = True
+            task_id = tasks.index(curr_task)
+            tasks[task_id] = updated_task
+
+    try:
+        if not is_found:
+            raise Exception
+        else:
+            return tasks
+    except Exception as e:
+        print("Not found task to update with the given id.Try again...")
 
 
 def get_task(tasks, task_id):
@@ -327,14 +341,19 @@ def main():
             if isinstance(tasks, list):
                 print("Task removed successfully.")
         elif choice == '3':
-            task_id = int(input("Enter task ID to update: "))
+            try:
+                task_id = int(input("Enter task ID to update: "))
+            except ValueError as e:
+                print("task id need to be a number")
+                continue
             updated_task = {
                 'description': input("Enter new task description: "),
                 'priority': input("Enter new task priority (low, medium, high): "),
                 'deadline': input("Enter new task deadline (YYYY-MM-DD): ")
             }
             tasks = update_task(tasks, task_id, updated_task)
-            print("Task updated successfully.")
+            if isinstance(tasks, list):
+                print("Task updated successfully.")
         elif choice == '4':
             task_id = int(input("Enter task ID to get: "))
             task = get_task(tasks, task_id)
