@@ -13,6 +13,8 @@ def add_task(tasks, task):
     Returns:
     list of dict: Updated list of tasks.
     """
+    tasks.append(task)
+    return tasks
 
 
 def remove_task(tasks, task_id):
@@ -26,6 +28,20 @@ def remove_task(tasks, task_id):
     Returns:
     list of dict: Updated list of tasks.
     """
+    task = None
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            task = curr_task
+            break
+
+    try:
+        if task == None:
+            raise Exception
+        else:
+            tasks.remove(task)
+            return tasks
+    except Exception as e:
+        print("Not found task with the given id. Try again...")
 
 
 def update_task(tasks, task_id, updated_task):
@@ -308,7 +324,8 @@ def main():
         elif choice == '2':
             task_id = int(input("Enter task ID to remove: "))
             tasks = remove_task(tasks, task_id)
-            print("Task removed successfully.")
+            if isinstance(tasks, list):
+                print("Task removed successfully.")
         elif choice == '3':
             task_id = int(input("Enter task ID to update: "))
             updated_task = {
