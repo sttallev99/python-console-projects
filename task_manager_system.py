@@ -238,6 +238,12 @@ def filter_tasks_by_priority(tasks, priority):
     Returns:
     list of dict: Tasks with the specified priority.
     """
+    filtered_tasks = []
+    for curr_task in tasks:
+        if curr_task["priority"] == priority:
+            filtered_tasks.append(curr_task)
+
+    return filtered_tasks
 
 
 def filter_tasks_by_status(tasks, status):
@@ -251,6 +257,7 @@ def filter_tasks_by_status(tasks, status):
     Returns:
     list of dict: Tasks with the specified completion status.
     """
+    return list(filter(lambda task: task["completed"] == status, tasks))
 
 
 def filter_tasks_by_deadline(tasks, deadline):
@@ -482,7 +489,13 @@ def main():
             found_tasks = search_tasks_by_keyword(tasks, keyword)
             print("Tasks found:", found_tasks)
         elif choice == '10':
-            priority = input("Enter priority to filter by (low, medium, high): ")
+            try:
+                priority = input("Enter priority to filter by (low, medium, high): ")
+                if priority != "low" and priority != "medium" and priority != "high":
+                    raise Exception("Priority field need to be one ot these: (low, medium, high).Try again...")
+            except Exception as e:
+                print(str(e))
+                continue
             filtered_tasks = filter_tasks_by_priority(tasks, priority)
             print("Filtered tasks:", filtered_tasks)
         elif choice == '11':
