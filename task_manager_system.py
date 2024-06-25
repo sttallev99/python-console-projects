@@ -219,6 +219,12 @@ def search_tasks_by_keyword(tasks, keyword):
     Returns:
     list of dict: Tasks that contain the keyword in their description.
     """
+    filtered_tasks = []
+    for curr_task in tasks:
+        if keyword in curr_task["description"]:
+            filtered_tasks.append(curr_task)
+
+    return filtered_tasks
 
 
 def filter_tasks_by_priority(tasks, priority):
