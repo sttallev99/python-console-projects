@@ -152,6 +152,24 @@ def mark_task_as_completed(tasks, task_id):
     Returns:
     list of dict: Updated list of tasks.
     """
+    is_found = False
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            is_found = True
+            try:
+                if not curr_task["completed"]:
+                    curr_task["completed"] = True
+                    return tasks
+                else:
+                    raise Exception("Cannot close already closed task.Try again with other task...")
+            except Exception as e:
+                print(str(e))
+
+    try:
+        if not is_found:
+            raise Exception("Not found task with the given id.Try again...")
+    except Exception as e:
+        print(str(e))
 
 
 def set_task_description(tasks, task_id, description):
@@ -411,9 +429,14 @@ def main():
             if isinstance(tasks, list):
                 print("Task deadline set successfully.")
         elif choice == '7':
-            task_id = int(input("Enter task ID to mark as completed: "))
+            try:
+                task_id = int(input("Enter task ID to mark as completed: "))
+            except ValueError as e:
+                print("task id need to be a number")
+                continue
             tasks = mark_task_as_completed(tasks, task_id)
-            print("Task marked as completed.")
+            if isinstance(tasks, list):
+                print("Task marked as completed.")
         elif choice == '8':
             task_id = int(input("Enter task ID to set description: "))
             description = input("Enter new description: ")
