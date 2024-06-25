@@ -271,6 +271,7 @@ def filter_tasks_by_deadline(tasks, deadline):
     Returns:
     list of dict: Tasks with the specified deadline.
     """
+    return list(filter(lambda task: task["deadline"] == deadline, tasks))
 
 
 def count_tasks(tasks):
@@ -283,7 +284,7 @@ def count_tasks(tasks):
     Returns:
     int: The total number of tasks.
     """
-
+    return len(tasks)
 
 def count_completed_tasks(tasks):
     """
