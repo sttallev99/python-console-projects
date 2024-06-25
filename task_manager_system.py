@@ -184,6 +184,28 @@ def set_task_description(tasks, task_id, description):
     Returns:
     list of dict: Updated list of tasks.
     """
+    is_found = False
+    for curr_task in tasks:
+        if curr_task["id"] == task_id:
+            is_found = True
+            try:
+                if description != "":
+                    curr_task["description"] = description
+                    return tasks
+                else:
+                    raise Exception("Description cannot be empty.Try again...")
+            except Exception as e:
+                print(str(e))
+                return {
+                    "tasks": tasks,
+                    "error_message": str(e)
+                }
+    try:
+        if not is_found:
+            raise Exception("Not found task with the given id.Try again...")
+    except Exception as e:
+        print(str(e))
+        return tasks
 
 
 def search_tasks_by_keyword(tasks, keyword):
@@ -438,10 +460,17 @@ def main():
             if isinstance(tasks, list):
                 print("Task marked as completed.")
         elif choice == '8':
-            task_id = int(input("Enter task ID to set description: "))
+            try:
+                task_id = int(input("Enter task ID to set description: "))
+            except ValueError as e:
+                print("task id need to be a number")
+                continue
             description = input("Enter new description: ")
             tasks = set_task_description(tasks, task_id, description)
-            print("Task description set successfully.")
+            if isinstance(tasks, list):
+                print("Task description set successfully.")
+            else:
+                tasks = tasks["tasks"]
         elif choice == '9':
             keyword = input("Enter keyword to search: ")
             found_tasks = search_tasks_by_keyword(tasks, keyword)
