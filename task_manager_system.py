@@ -310,6 +310,7 @@ def count_pending_tasks(tasks):
     Returns:
     int: The number of pending tasks.
     """
+    return len(list(filter(lambda task: not task["completed"], tasks)))
 
 
 def generate_task_summary(tasks):
@@ -322,6 +323,15 @@ def generate_task_summary(tasks):
     Returns:
     dict: A summary report containing total, completed, and pending tasks.
     """
+    all_tasks = len(tasks)
+    completed_tasks = len(list(filter(lambda task: task["completed"], tasks)))
+    pending_tasks = len(list(filter(lambda task: not task["completed"], tasks)))
+
+    return {
+        "all": all_tasks,
+        "completed": completed_tasks,
+        "pending": pending_tasks
+    }
 
 
 def save_tasks_to_file(tasks, file_path):
@@ -335,6 +345,19 @@ def save_tasks_to_file(tasks, file_path):
     Returns:
     None
     """
+    result = ""
+    for curr_task in tasks:
+        curr_result = ""
+        for k, v in curr_task.items():
+            if k == "id":
+                curr_result = f"{k} : {v}\n"
+            else:
+                curr_result += f"\t{k} : {v}\n"
+        result += curr_result
+
+    file1 = open(file_path, "w")
+    file1.write(result)
+    file1.close()
 
 
 def load_tasks_from_file(file_path):
