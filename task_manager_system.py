@@ -286,6 +286,7 @@ def count_tasks(tasks):
     """
     return len(tasks)
 
+
 def count_completed_tasks(tasks):
     """
     Returns the number of completed tasks.
@@ -296,6 +297,7 @@ def count_completed_tasks(tasks):
     Returns:
     int: The number of completed tasks.
     """
+    return len(list(filter(lambda task: task["completed"], tasks)))
 
 
 def count_pending_tasks(tasks):
