@@ -345,19 +345,22 @@ def save_tasks_to_file(tasks, file_path):
     Returns:
     None
     """
-    result = ""
+    # result = ""
+    # for curr_task in tasks:
+    #     curr_result = ""
+    #     for k, v in curr_task.items():
+    #         if k == "id":
+    #             curr_result = f"{k} : {v}\n"
+    #         else:
+    #             curr_result += f"\t{k} : {v}\n"
+    #     result += curr_result
+    #
+    file1 = open(file_path, "a")
     for curr_task in tasks:
-        curr_result = ""
-        for k, v in curr_task.items():
-            if k == "id":
-                curr_result = f"{k} : {v}\n"
-            else:
-                curr_result += f"\t{k} : {v}\n"
-        result += curr_result
-
-    file1 = open(file_path, "w")
-    file1.write(result)
+        file1.write(str(curr_task) + "\n")
     file1.close()
+
+    return tasks
 
 
 def load_tasks_from_file(file_path):
@@ -370,6 +373,12 @@ def load_tasks_from_file(file_path):
     Returns:
     list of dict: The loaded list of tasks.
     """
+    file1 = open(file_path, "r")
+    loaded_tasks = file1.readlines()
+    file1.close()
+    loaded_tasks = list(map(lambda task: eval(task[:len(task) - 1]), loaded_tasks))
+
+    return loaded_tasks
 
 
 def sort_tasks_by_deadline(tasks):
