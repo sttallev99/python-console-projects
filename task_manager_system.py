@@ -115,6 +115,7 @@ def set_task_priority(tasks, task_id, priority):
     except Exception as e:
         print("Not found task with the given id.Try again...")
 
+
 def set_task_deadline(tasks, task_id, deadline):
     """
     Sets the deadline for a task.
@@ -391,6 +392,10 @@ def sort_tasks_by_deadline(tasks):
     Returns:
     list of dict: The sorted list of tasks.
     """
+
+    sorted_tasks = sorted(tasks, key=lambda x: datetime.strptime(x["deadline"], "%Y-%m-%d"))
+    print(sorted_tasks)
+    return sorted_tasks
 
 
 def sort_tasks_by_priority(tasks):
