@@ -408,6 +408,9 @@ def sort_tasks_by_priority(tasks):
     Returns:
     list of dict: The sorted list of tasks.
     """
+    priority_list = dict(high=0, medium=1, low=2)
+    tasks.sort(key=lambda x: priority_list[x["priority"]])
+    return tasks
 
 
 def print_menu():
